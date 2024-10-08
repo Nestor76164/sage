@@ -1,0 +1,172 @@
+body {
+  background-color: #cbcbcb;
+  margin: 0px;
+  font-family: Arial, sans-serif;
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+#formContainer, #tableContainer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin: 3px;
+  border-radius: 5px;
+}
+
+#formContainer {
+  flex: 1;
+}
+
+#submit {
+background-color: aqua;
+}
+
+#tableContainer {
+  flex: 3;
+  padding: 0%;
+  text-align: center;
+}
+
+#paymentForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+}
+
+#paymentForm .form-group {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+
+#paymentForm label {
+  text-align: right;
+  padding-right: 10px;
+}
+
+#paymentForm input {
+  width: 97%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#paymentTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#paymentTable th, #paymentTable td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#paymentTable th {
+  background-color: #f2f2f2;
+}
+
+#paymentTableBody tr td:first-child {
+  font-weight: bold;
+}
+
+#paymentForm button[type="submit"] {
+  background-color: #4CAF50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Style lorsque le curseur passe sur le bouton */
+#paymentForm button[type="submit"]:hover {
+  background-color: #45a049; /* Couleur de fond au survol */
+}
+
+@media (max-width: 950px) {
+  #container {
+    flex-direction: column;
+  }
+
+  #formContainer{
+    padding: 10px;
+    text-align: center;
+  }
+  #tableContainer {
+    padding: 3px;
+  }
+
+  #paymentForm .form-group {
+    grid-template-columns: 1fr;
+  }
+
+  #paymentForm label {
+    text-align: left;
+    padding-right: 0;
+  }
+
+  #paymentTable th, #paymentTable td {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  #paymentTable,
+  #paymentTable thead,
+  #paymentTable tbody,
+  #paymentTable tr,
+  #paymentTable th,
+  #paymentTable td {
+    display: block;
+  }
+
+  #paymentTable thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+    #paymentTable tr {
+      border: 1px solid #c1b5b5;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      background-color: #b1aaaa;
+      padding: 15px;
+    }
+
+  #paymentTable td {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  #paymentTable td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  #paymentTable td:nth-of-type(1):before { content: "N°"; }
+  #paymentTable td:nth-of-type(2):before { content: "Noms du client :"; }
+  #paymentTable td:nth-of-type(3):before { content: "Numéro de téléphone :"; }
+  #paymentTable td:nth-of-type(4):before { content: "Adresse :"; }
+  #paymentTable td:nth-of-type(5):before { content: "Numéro du compteur :"; }
+  #paymentTable td:nth-of-type(6):before { content: "dette (CDF) :"; }
+  #paymentTable td:nth-of-type(7):before { content: "Date de désactivation :"; }
+}

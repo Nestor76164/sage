@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>monitoring</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <h1>Monitoring de la consommation d'eau des clients en temps réel</h1>
+   <div class="table-responsive">
+              <table>
+                  <tr>
+                      <th>NOMS DES CLIENTS</th>
+                      <th>ADRESSE</th>
+                      <th>QUANTITE (M³)</th>
+                      <th>MONTANT (CDF)</th>
+                      <th>OBSERVATION</th>
+                      <th>COMMANDE</th>
+                  </tr>
+                  <tr>
+                      <td>NESTOR KIBUKA</td>
+                      <td>C.gombe Q.funa Av.mukelenge N°10</td>
+                      <td id="ldr1Value"></td>
+                      <td id = "CDF"></td>
+                      <td class = "observ1">Activé</td>
+                      <td>
+                        <label class="switch">
+                          <input type="checkbox" id="toggleSwitch1">
+                          <span class="slider"></span>
+                        </label>
+                        <span id="observ1" class="observ-placeholder default-text"></span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>BERNARD CHIBARAMA</td> 
+                      <td></td>
+                      <td id="ldr2Value"></td>
+                      <td id="CDF2"></td>
+                      <td class = "observ2">Desactivé</td>
+                      <td>
+                      <label class="switch">
+                        <input type="checkbox" id="toggleSwitch2">
+                        <span class="slider"></span>
+                      </label>
+                      <span id="observ2" class="observ-placeholder default-text"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Emma Johnson</td>
+                    <td></td>
+                    <td id="ldr3Value"></td>
+                    <td>5000 fc</td>
+                    <td class = "observ3">Desactivé</td>
+                    <td>
+                    <label class="switch">
+                      <input type="checkbox" id="toggleSwitch3">
+                      <span class="slider"></span>
+                    </label>
+                    <span id="observ3" class="observ-placeholder default-text">Désactivé</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>David Garcia</td>
+                  <td>C.gombe Q.funa Av.mukelenge N°10</td>
+                  <td id="ldr2Value"></td>
+                  <td>5000 fc</td>
+                  <td class = "observ4">Desactivé</td>
+                  <td>
+                  <label class="switch">
+                    <input type="checkbox" id="toggleSwitch4">
+                    <span class="slider"></span>
+                  </label>
+                  <span id="observ4" class="observ-placeholder default-text">Désactivé</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Sophia Lee</td>
+                <td></td>
+                <td id="ldr2Value"></td>
+                <td>5000 fc</td>
+                <td class = "observ5">Desactivé</td>
+                <td>
+                <label class="switch">
+                  <input type="checkbox" id="toggleSwitch5">
+                  <span class="slider"></span>
+                </label>
+                <span id="observ5" class="observ-placeholder default-text">Désactivé</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Alexander Smith</td>
+              <td></td>
+              <td id="ldr2Value"></td>
+              <td>5000 fc</td>
+              <td class = "observ6">Desactivé</td>
+              <td>
+              <label class="switch">
+                <input type="checkbox" id="toggleSwitch6">
+                <span class="slider"></span>
+              </label>
+              <span id="observ6" class="observ-placeholder default-text">Désactivé</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Olivia Brown</td>
+            <td></td>
+            <td id="ldr2Value"></td>
+            <td>5000 fc</td>
+            <td class = "observ7">Desactivé</td>
+            <td>
+            <label class="switch">
+              <input type="checkbox" id="toggleSwitch7">
+              <span class="slider"></span>
+            </label>
+            <span id="observ7" class="observ-placeholder default-text">Désactivé</span>
+          </td>
+          </tr>
+          <tr>
+            <td>Ethan Davis</td>
+            <td></td>
+            <td id="ldr2Value"></td>
+            <td>5000 fc</td>
+            <td class = "observ8">Desactivé</td>
+            <td>
+            <label class="switch">
+              <input type="checkbox" id="toggleSwitch8">
+              <span class="slider"></span>
+            </label>
+            <span id="observ8" class="observ-placeholder default-text">Désactivé</span>
+          </td>
+          </tr>
+          <tr>
+            <td>Isabella Martinez</td>
+            <td></td>
+            <td id="ldr2Value"></td>
+            <td>5000 fc</td>
+            <td class = "observ9">Desactivé</td>
+            <td>
+            <label class="switch">
+              <input type="checkbox" id="toggleSwitch9">
+              <span class="slider"></span>
+            </label>
+            <span id="observ9" class="observ-placeholder default-text">Désactivé</span>
+          </td>
+          </tr>
+          <tr>
+            <td>Noah Anderson</td>
+            <td></td>
+            <td id="ldr2Value"></td>
+            <td>5000 fc</td>
+            <td class = "observ10">Desactivé</td>
+            <td>
+            <label class="switch">
+              <input type="checkbox" id="toggleSwitch10">
+              <span class="slider"></span>
+            </label>
+            <span id="observ10" class="observ-placeholder default-text">Désactivé</span>
+          </td>
+          </tr>
+          <tr>
+            <td>David Garcia</td>
+            <td>C.gombe Q.funa Av.mukelenge N°10</td>
+            <td id="ldr2Value"></td>
+            <td>5000 fc</td>
+            <td class = "observ4">Desactivé</td>
+            <td>
+            <label class="switch">
+              <input type="checkbox" id="toggleSwitch4">
+              <span class="slider"></span>
+            </label>
+            <span id="observ4" class="observ-placeholder default-text">Désactivé</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Sophia Lee</td>
+          <td></td>
+          <td id="ldr2Value"></td>
+          <td>5000 fc</td>
+          <td class = "observ5">Desactivé</td>
+          <td>
+          <label class="switch">
+            <input type="checkbox" id="toggleSwitch5">
+            <span class="slider"></span>
+          </label>
+          <span id="observ5" class="observ-placeholder default-text">Désactivé</span>
+        </td>
+      </tr>
+      <tr>
+        <td>Alexander Smith</td>
+        <td></td>
+        <td id="ldr2Value"></td>
+        <td>5000 fc</td>
+        <td class = "observ6">Desactivé</td>
+        <td>
+        <label class="switch">
+          <input type="checkbox" id="toggleSwitch6">
+          <span class="slider"></span>
+        </label>
+        <span id="observ6" class="observ-placeholder default-text">Désactivé</span>
+      </td>
+    </tr>
+    <tr>
+      <td>Olivia Brown</td>
+      <td></td>
+      <td id="ldr2Value"></td>
+      <td>5000 fc</td>
+      <td class = "observ7">Desactivé</td>
+      <td>
+      <label class="switch">
+        <input type="checkbox" id="toggleSwitch7">
+        <span class="slider"></span>
+      </label>
+      <span id="observ7" class="observ-placeholder default-text">Désactivé</span>
+    </td>
+    </tr>
+    <tr>
+      <td>Ethan Davis</td>
+      <td></td>
+      <td id="ldr2Value"></td>
+      <td>5000 fc</td>
+      <td class = "observ8">Desactivé</td>
+      <td>
+      <label class="switch">
+        <input type="checkbox" id="toggleSwitch8">
+        <span class="slider"></span>
+      </label>
+      <span id="observ8" class="observ-placeholder default-text">Désactivé</span>
+    </td>
+    </tr>
+    <tr>
+      <td>Isabella Martinez</td>
+      <td></td>
+      <td id="ldr2Value"></td>
+      <td>5000 fc</td>
+      <td class = "observ9">Desactivé</td>
+      <td>
+      <label class="switch">
+        <input type="checkbox" id="toggleSwitch9">
+        <span class="slider"></span>
+      </label>
+      <span id="observ9" class="observ-placeholder default-text">Désactivé</span>
+    </td>
+    </tr>
+              </table>
+     </div>
+      
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+          authDomain: "esp32-b9013.firebaseapp.com",
+          databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "esp32-b9013",
+          storageBucket: "esp32-b9013.appspot.com",
+          messagingSenderId: "547189202345",
+          appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+        };
+      
+        // Initialize Firebase
+        //const app = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // valeur de CDF nestor
+        database.ref("CDF/NESTOR KIBUKA").on("value", (snapshot) => {
+        const CDF = snapshot.val();
+        document.getElementById("CDF").textContent = CDF + " fc";
+        });
+
+         // valeur de CDF bernard
+        database.ref("CDF/BERNARD CHIBARAMA").on("value", (snapshot) => {
+        const CDF2 = snapshot.val();
+        document.getElementById("CDF2").textContent = CDF2 + " fc";
+        });
+
+        // valeur de LDR 1
+        database.ref("test/ldr").on("value", (snapshot) => {
+        const ldr1Value = snapshot.val();
+        document.getElementById("ldr1Value").textContent = ldr1Value + " m³";
+
+                // pour effectuer la conversion de litre en fc
+                if (ldr1Value !== null && !isNaN(ldr1Value)) {
+                  var litre = 200;
+                  var result = ldr1Value * litre;
+      firebase.database().ref('CDF/NESTOR KIBUKA').set(result)
+    }
+        });
+
+        //valeur de LDR 2
+        database.ref("test/ldr2").on("value", (snapshot) => {
+        const ldr2Value = snapshot.val();
+        document.getElementById("ldr2Value").textContent = ldr2Value + " m³";
+                // Vérifie si la valeur existante est valide et effectue la soustraction
+                if (ldr2Value !== null && !isNaN(ldr2Value)) {
+                  var litre = 100;
+                  var result = ldr2Value * litre;
+      firebase.database().ref('CDF/BERNARD CHIBARAMA').set(result)
+    }
+
+        });
+
+        //valeur de LDR 3
+        database.ref("test/ldr3").on("value", (snapshot) => {
+        const ldr3Value = snapshot.val();
+        document.getElementById("ldr3Value").textContent = ldr3Value + " m³";
+        });
+
+        //username
+        //database.ref("client").on("value", (snapshot) => {
+        //const  = snapshot.val();
+        //document.getElementById("ldr1Value").textContent = ldr1Value;
+       // });
+        // Récupérer les références des éléments des boutons basculants
+        const toggleSwitch1 = document.getElementById('toggleSwitch1');
+        const toggleSwitch2 = document.getElementById('toggleSwitch2');
+        const toggleSwitch3 = document.getElementById('toggleSwitch3');
+        const toggleSwitch4 = document.getElementById('toggleSwitch4');
+        const toggleSwitch5 = document.getElementById('toggleSwitch5');
+        const toggleSwitch6 = document.getElementById('toggleSwitch6');
+        const toggleSwitch7 = document.getElementById('toggleSwitch7');
+        const toggleSwitch8 = document.getElementById('toggleSwitch8');
+        const toggleSwitch9 = document.getElementById('toggleSwitch9');
+        const toggleSwitch10 = document.getElementById('toggleSwitch10');
+
+        var observ1 = document.getElementById("observ1");
+        var observ2 = document.getElementById("observ2");
+        var observ3 = document.getElementById("observ3");
+        var observ4 = document.getElementById("observ4");
+        var observ5 = document.getElementById("observ5");
+        var observ6 = document.getElementById("observ6");
+        var observ7 = document.getElementById("observ7");
+        var observ8 = document.getElementById("observ8");
+        var observ9 = document.getElementById("observ9");
+        var observ10 = document.getElementById("observ10");
+
+        // Référence à la base de données Firebase
+        const firebaseRef1 = firebase.database().ref('recev/etat');
+        const firebaseRef2 = firebase.database().ref('recev/etat2');
+
+        // Fonction pour envoyer la valeur à Firebase
+        function sendValueToFirebase(ref, value) {
+        const firebaseRef = firebase.database().ref(ref);
+        firebaseRef.set(value);
+        }
+
+        // Fonction pour envoyer les éléments à Firebase
+        function sendElementsToFirebase(ref, data) {
+        const firebaseRef = firebase.database().ref(ref);
+        firebaseRef.set(data);
+        }
+
+
+
+              // Écouter les modifications de la valeur dans la base de données
+              firebaseRef1.on('value', function(snapshot) {
+          const position = snapshot.val();
+          toggleSwitch1.checked = position === 1;
+        if (toggleSwitch1.checked) {
+          observ1.textContent = "Activé";
+          observ1.style.color = "blue"; // Couleur du texte activé
+          toggleSwitch1.disabled = false; // Désactiver le bouton
+        } else {
+           observ1.textContent = "Désactivé";
+            observ1.style.color = "red"; // Couleur du texte désactivé (rouge)
+            toggleSwitch1.disabled = true; // Désactiver le bouton
+          }
+          });
+
+            // Écouter les modifications de la valeur dans la base de données
+          firebaseRef2.on('value', function(snapshot) {
+          const position = snapshot.val();
+          toggleSwitch2.checked = position === 1;
+        if (toggleSwitch2.checked) {
+          observ2.textContent = "Activé";
+          observ2.style.color = "blue"; // Couleur du texte activé
+          toggleSwitch2.disabled = false; // Désactiver le bouton
+        } else {
+           observ2.textContent = "Désactivé";
+            observ2.style.color = "red"; // Couleur du texte désactivé (rouge)
+            toggleSwitch2.disabled = true; // Désactiver le bouton
+          }
+          });
+
+
+
+
+        // Écouter les événements de changement d'état des boutons
+        toggleSwitch1.addEventListener('change', function() {
+        const isChecked = toggleSwitch1.checked;
+        const nom = 'NESTOR KIBUKA';
+        const telephone = '+243 971195065'
+        const adresse = 'C.gombe Q.funa Av.mukelenge N°10';
+        const compteur ='__';
+        const montant = '__';
+
+        sendValueToFirebase('recev/etat', isChecked ? 1 : 0);
+        if (toggleSwitch1.checked) {
+          observ1.textContent = "Activé";
+          observ1.style.color = "blue"; // Couleur du texte activé
+          sendElementsToFirebase('elements/bouton1', null); // Supprimer les données
+          
+        } else {
+          observ1.textContent = "Désactivé";
+          observ1.style.color = "red"; // Couleur du texte désactivé (rouge)
+          sendElementsToFirebase('elements/bouton1', { nom, telephone, adresse, compteur, montant });
+
+          
+        }
+        });
+
+
+        toggleSwitch2.addEventListener('change', function() {
+        const isChecked = toggleSwitch2.checked;
+        const nom = 'BERNARD CHIBARAMA';
+        const telephone = '+243 8245648910'
+        const adresse = 'C.Barumbu Q.funa Av.mukelenge N°08';
+        const compteur ='__';
+        const montant = '__';
+
+        sendValueToFirebase('recev/etat2', isChecked ? 1 : 0);
+        if (toggleSwitch2.checked) {
+          observ2.textContent = "Activé";
+          observ2.style.color = "blue"; // Couleur du texte activé
+          sendElementsToFirebase('elements/bouton2', null); // Supprimer les données
+          
+        } else {
+          observ2.textContent = "Désactivé";
+          observ2.style.color = "red"; // Couleur du texte désactivé (rouge)
+          sendElementsToFirebase('elements/bouton2', { nom, telephone, adresse, compteur, montant });
+          
+
+
+        }
+        });
+
+        toggleSwitch3.addEventListener('change', function() {
+        const isChecked = toggleSwitch3.checked;
+        sendValueToFirebase('chemin/vers/bouton3', isChecked ? 1 : 0);
+        if (toggleSwitch3.checked) {
+          observ3.textContent = "Activé";
+          observ3.style.color = "blue"; // Couleur du texte activé
+          
+        } else {
+          observ3.textContent = "Désactivé";
+          observ3.style.color = "red"; // Couleur du texte désactivé (rouge)
+          
+        }
+        });
+        
+
+      </script>
+  
+
+</body>
+</html>
+
+

@@ -1,0 +1,84 @@
+/* Styles généraux */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .userProf {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userDetails {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .table-container {
+    max-width: 100%;
+  }
+
+  .progr {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .par {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .payment-link,
+  .deconnecter-link {
+    margin: 10px 0;
+  }
+}
+
+/* Styles pour les écrans plus petits */
+@media (max-width: 480px) {
+  .user {
+    width: 100px;
+    height: 100px;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+
+  .num,
+  .numConteur {
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    font-size: 14px;
+  }
+
+  .progress-value {
+    font-size: 12px;
+  }
+
+  .par {
+    font-size: 12px;
+  }
+
+  .controle {
+    font-size: 16px;
+  }
+}

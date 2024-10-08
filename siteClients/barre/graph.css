@@ -1,0 +1,29 @@
+.chart-container {
+    max-width: 535px; /* Définir la largeur maximale souhaitée */
+    height:400px; /* Définir la hauteur souhaitée */
+    padding: 0%;
+    margin-bottom: 0px; /* Ajouter une marge en bas du conteneur de graphiques */
+  }
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+ h2 {
+    font-size: 20px;
+    margin-bottom: 0%;
+    margin-top: 25px;
+  }
+
+  .chart-container {
+    max-width: 60%; /* Par défaut, occupe 60% de la largeur sur les grands écrans */
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  @media only screen and (max-width: 600px) { /* Adaptez la valeur en fonction des besoins */
+    .chart-container {
+      max-width: 100%; /* Occupe la largeur maximale sur les petits écrans */
+      margin-bottom: 200px;
+    }
+  }

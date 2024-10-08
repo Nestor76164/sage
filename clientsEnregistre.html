@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients_enregistrés</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="menu.css">
+    <link rel="stylesheet" type="text/css" href="table.css">
+</head>
+<body>
+  <div class="overlay"></div>
+  <nav>
+    <div class="left-section">
+      <img src="photo_agent.jpg" alt="photo_agent_indisponible" class="photo_agent">
+      <span class="agent-name">NOM AGENT</span>
+    </div>
+    <button class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="menu-window">
+      <ul class="menu-items">
+        <li><a href="payement.html">Ajouter un payement</a></li>
+        <li ><a href="clientsDesactive.html">Clients desactivés</a></li>
+        <li class="active" ><a href="clientsEnregistre.html">Clients enregistrés</a></li>
+        <li class="last-child"><a href="index.html">Déconnexion</a></li>
+      </ul>
+    </div>
+  </nav>
+    <div id="tableContainer">
+      <h2>Liste des clients enregistrés</h2>
+      <table id="paymentTable">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nom du client</th>
+            <th>Numéro de téléphone</th>
+            <th>Adresse</th>
+            <th>Numéro du compteur</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="paymentTableBody">
+          <!-- Contenu du tableau ici -->
+        </tbody>
+      </table>
+    </div>
+    <script src="menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="barre/barre.css">
+    <script src="barre/barre.js"></script>
+    <title>home</title>
+
+    
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="userProf">
+      <img src="user.jpg" alt="user" class="user">
+      <div class="userDetails">
+        <h1>NESTOR KIBUKA</h1>
+        <p class="num">Numero du compteur :</p>
+        <p class="numConteur">10002468</p>
+      </div>
+    </div>
+  
+    <h2>VOTRE CONSOMMATION D'EAU</h2>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Litre</th>
+          <th>Montant</th>
+        </tr>
+        <tr>
+          <td id="ldr1Value">m³</td>
+          <td id="CDF">fc</td>
+        </tr>
+      </table>
+      <div class="progr">
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+          <span class="progress-value" id="progressValue">0%</span>
+        </div>
+        <p class="par">Le litre ci-dessus correspond à votre consommation d'eau en temps réel, et le montants indique votre dette à régler</p>
+      </div>
+      <div class="controle">
+        <p>Contrôle de l'arrivée d'eau de votre compteur</p>
+        <table>
+          <tr>
+            <td><span id="observ1" class="observ-placeholder default-text"></span></td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="toggleSwitch1">
+                <span class="slider"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="actions">
+        <a href="#" class="payment-link"><i class="fas fa-money-check"></i> Faire un paiement</a>
+        <a href="../index.html" class="deconnecter-link">deconnecter</a>
+      </div>
+    </div>
+  </div>
+
+       
+<div class="menu">
+    <a href="index1.html" class="menu-icon menu-icon-home" ><i class="fas fa-home"></i></a>
+    <a href="seting.html" class="menu-icon menu-icon-seting" ><i class="fas fa-chart-bar"></i></a> 
+    <a href="notification.html" class="menu-icon menu-icon-notification" ><i class="fas fa-bell"></i></a>
+    <a href="message.html" class="menu-icon menu-icon-message" ><i class="fas fa-envelope"></i></a>  
+    <a href="user.html" class="menu-icon menu-icon-user" ><i class="fas fa-user"></i></a> 
+  </div>
+
+  <style>
+    .menu-icon-home {
+    font-size: 40px; 
+    color: rgb(17, 30, 226);
+
+  }
+  </style>
+
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+    authDomain: "esp32-b9013.firebaseapp.com",
+    databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "esp32-b9013",
+    storageBucket: "esp32-b9013.appspot.com",
+    messagingSenderId: "547189202345",
+    appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+  };
+
+  // Initialize Firebase
+  //const app = initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
+  /*const messaging = firebase.messaging();
+  messaging.requestPermission()
+  .then(function(){
+    console.log('vous avez la permission');
+  })
+  .catch(function(err){
+    console.log('erreur de la permission');
+  })*/
+
+  const database = firebase.database();
+
+//----------------------------Switch--------------------------------------------------------
+  // Récupérer les références des éléments des boutons basculants
+  const toggleSwitch1 = document.getElementById('toggleSwitch1');
+
+
+   // Référence à la base de données Firebase
+   const firebaseRef1 = firebase.database().ref('recev/etatB');
+
+                 // Écouter les modifications de la valeur dans la base de données
+                 firebaseRef1.on('value', function(snapshot) {
+          const position = snapshot.val();
+          toggleSwitch1.checked = position === 1;
+        if (toggleSwitch1.checked) {
+          observ1.textContent = "Activé";
+          observ1.style.color = "blue"; // Couleur du texte activé
+          toggleSwitch1.disabled = false; // Désactiver le bouton
+        } else {
+           observ1.textContent = "Désactivé";
+            observ1.style.color = "red"; // Couleur du texte désactivé (rouge)
+            toggleSwitch1.disabled = true; // Désactiver le bouton
+          }
+          });
+
+          toggleSwitch1.addEventListener('change', function() {
+        const isChecked = toggleSwitch1.checked;
+
+        sendValueToFirebase('recev/etat2', isChecked ? 1 : 0);
+        });
+
+                  // Ajouter un écouteur d'événements sur le bouton pour envoyer 1 ou 0 dans Firebase
+          const firebaseRef2 = firebase.database().ref('recev/etat3');     
+          toggleSwitch1.addEventListener('change', function() {
+            if (toggleSwitch1.checked) {
+              // Si le bouton est activé, envoyer 1 dans Firebase
+              firebaseRef2.set(1);
+              observ1.textContent = "Activé";
+              observ1.style.color = "blue";
+            } else {
+              // Si le bouton est désactivé, envoyer 0 dans Firebase
+              firebaseRef2.set(0);
+              observ1.textContent = "Désactivé";
+              observ1.style.color = "red";
+            }
+          });
+    //-----------------------------------------------------------------------------------
+
+ // valeur de CDF nestor
+ database.ref("CDF/NESTOR KIBUKA").on("value", (snapshot) => {
+        const CDF = snapshot.val();
+        document.getElementById("CDF").textContent = CDF + " fc";
+        });
+
+        // valeur de LDR 1
+        database.ref("test/ldr").on("value", (snapshot) => {
+        const ldr1Value = snapshot.val();
+        document.getElementById("ldr1Value").textContent = ldr1Value + " m³";
+              // pour effectuer la conversion de litre en fc
+                if (ldr1Value !== null && !isNaN(ldr1Value)) {
+                  var litre = 200;
+                  var result = ldr1Value * litre;
+      firebase.database().ref('CDF/NESTOR KIBUKA').set(result)
+    }
+        });
+  </script>
+</body>
+</html>

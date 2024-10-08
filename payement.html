@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>payement</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="payement.css">
+  <link rel="stylesheet" type="text/css" href="menu.css">
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="overlay"></div>
+  <nav>
+    <div class="left-section">
+      <img src="photo_agent.jpg" alt="photo_agent_indisponible" class="photo_agent">
+      <span class="agent-name">NOM AGENT</span>
+    </div>
+    <button class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="menu-window">
+      <ul class="menu-items">
+        <li class="active" ><a href="payement.html">Ajouter un payement</a></li>
+        <li ><a href="clientsDesactive.html">Clients desactivés</a></li>
+        <li><a href="clientsEnregistre.html">Clients enregistrés</a></li>
+        <li class="last-child"><a href="index.html">Déconnexion</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div id="container">
+    <div id="formContainer">
+      <form id="paymentForm">
+        <h2>Ajouter un paiement</h2>
+        <div class="form-group">
+          <label for="meterNumber">Numéro de compteur:</label>
+          <input type="text" id="meterNumber" name="meterNumber" required>
+        </div>
+        <div class="form-group">
+          <label for="clientName">Nom du client:</label>
+          <input type="text" id="clientName" name="clientName" required>
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Numéro de téléphone:</label>
+          <input type="text" id="phoneNumber" name="phoneNumber" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Adresse:</label>
+          <input type="text" id="address" name="address" required>
+        </div>
+        <div class="form-group">
+          <label for="amount">Montant:</label>
+          <input type="text" id="amount" name="amount" required>
+        </div>
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <button type="submit">Valider</button>
+      </form>
+    </div>
+
+    <div id="tableContainer">
+      <h2>Liste des paiements</h2>
+      <table id="paymentTable">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nom du client</th>
+            <th>Numéro de téléphone</th>
+            <th>Adresse</th>
+            <th>Numéro de compteur</th>
+            <th>Montant</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="paymentTableBody">
+          <tr>
+            <td data-label="N°">0</td>
+            <td data-label="Nom du client">John Doe</td>
+            <td data-label="Numéro de téléphone">0123456789</td>
+            <td data-label="Adresse">Barumbu mukelenge N°10</td>
+            <td data-label="Numéro de compteur">ABC123</td>
+            <td data-label="Montant">100</td>
+            <td data-label="Date">2023-06-01</td>
+          </tr>
+          <!-- Contenu du tableau ici -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+          authDomain: "esp32-b9013.firebaseapp.com",
+          databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "esp32-b9013",
+          storageBucket: "esp32-b9013.appspot.com",
+          messagingSenderId: "547189202345",
+          appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+        };
+      
+        // Initialize Firebase
+        //const app = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+
+
+
+
+
+    var paymentIndex = 1; // Variable pour le numéro de ligne
+
+            // Fonction pour envoyer les éléments à Firebase
+            function sendElementsToFirebase(ref, data) {
+        const firebaseRef = firebase.database().ref(ref);
+        firebaseRef.set(data);
+        }
+
+document.getElementById("paymentForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  addPaymentToTable();
+  clearPaymentForm();
+});
+
+function addPaymentToTable() {
+  var tableBody = document.getElementById("paymentTableBody");
+  var newRow = document.createElement("tr");
+
+  var indexCell = document.createElement("td");
+  indexCell.textContent = paymentIndex;
+  newRow.appendChild(indexCell);
+
+  var clientName = document.getElementById("clientName").value;
+  var clientNameCell = document.createElement("td");
+  clientNameCell.textContent = clientName;
+  newRow.appendChild(clientNameCell);
+
+  var phoneNumber = document.getElementById("phoneNumber").value;
+  var phoneNumberCell = document.createElement("td");
+  phoneNumberCell.textContent = phoneNumber;
+  newRow.appendChild(phoneNumberCell);
+
+  var address = document.getElementById("address").value;
+  var addressCell = document.createElement("td");
+  addressCell.textContent = address;
+  newRow.appendChild(addressCell);
+
+  var meterNumber = document.getElementById("meterNumber").value;
+  var meterNumberCell = document.createElement("td");
+  meterNumberCell.textContent = meterNumber;
+  newRow.appendChild(meterNumberCell);
+
+  var amount = document.getElementById("amount").value;
+  var amountCell = document.createElement("td");
+  amountCell.textContent = amount;
+  newRow.appendChild(amountCell);
+
+  var date = document.getElementById("date").value;
+  var parsedAmount = parseInt(amount); // Convertir la valeur en nombre décimal
+
+  tableBody.appendChild(newRow);
+
+  paymentIndex++; // Incrémenter le numéro de ligne
+
+// Vérifier si la conversion a réussi
+if (!isNaN(parsedAmount)) {
+  var amountCell = document.createElement("td");
+  amountCell.textContent = parsedAmount;
+  newRow.appendChild(amountCell);
+
+  var paymentData = {
+    phoneNumber: phoneNumber,
+    address: address,
+    meterNumber: meterNumber,
+    amount: parsedAmount, // Utiliser la valeur convertie en nombre
+    date: date
+  };
+
+  // Stocker paymentData dans la base de données ...
+} else {
+  console.log("Le montant saisi n'est pas un nombre valide.");
+}
+
+  // Stockez les données dans Firebase Realtime Database
+// Utilisez le nom du client comme clé et stockez les données dans Firebase Realtime Database
+firebase.database().ref('paiements').child(clientName).set(paymentData);
+
+}
+
+function clearPaymentForm() {
+  document.getElementById("paymentForm").reset();
+}
+
+
+        // Écoute les modifications dans le premier lien CLIENT 1
+        firebase.database().ref('paiements/NESTOR KIBUKA/amount').on('value', function(snapshot) {
+        var newAmount = snapshot.val();
+
+        // Récupère la valeur existante du deuxième lien
+        firebase.database().ref('test/ldr').once('value', function(snapshot) {
+         var existingValue = snapshot.val();
+    
+        // Vérifie si la valeur existante est valide et effectue la soustraction
+        if (existingValue !== null && !isNaN(existingValue)) { 
+          var coutParLitre = 200;
+          var detteTotaleDollars  = existingValue * coutParLitre;
+          var detteRestanteDollars = detteTotaleDollars - newAmount;
+          var detteRestanteLitres = detteRestanteDollars / coutParLitre;
+
+        // Met à jour la valeur dans le deuxième lien
+         firebase.database().ref('test/ldr').set(detteRestanteLitres)
+         firebase.database().ref('paiements/NESTOR KIBUKA/amount').set(0)
+         } else {
+       console.log('La valeur existante est invalide.');
+       }
+      
+       database.ref("CDF/NESTOR KIBUKA").on("value", (snapshot) => {
+        var CDF = snapshot.val();
+        if (CDF === 0){
+        firebase.database().ref('recev/etat').set(1)
+        sendElementsToFirebase('elements/bouton1', null); // Supprimer les données
+        }
+       
+        });
+       
+     });
+     });
+
+
+             // Écoute les modifications dans le premier lien CLIENT 2
+             firebase.database().ref('paiements/BERNARD CHIBARAMA/amount').on('value', function(snapshot) {
+        var newAmount = snapshot.val();
+
+        // Récupère la valeur existante du deuxième lien
+        firebase.database().ref('test/ldr2').once('value', function(snapshot) {
+         var existingValue = snapshot.val();
+    
+        // Vérifie si la valeur existante est valide et effectue la soustraction
+        if (existingValue !== null && !isNaN(existingValue)) { 
+          var coutParLitre = 200;
+          var detteTotaleDollars  = existingValue * coutParLitre;
+          var detteRestanteDollars = detteTotaleDollars - newAmount;
+          var detteRestanteLitres = detteRestanteDollars / coutParLitre;
+
+        // Met à jour la valeur dans le deuxième lien
+         firebase.database().ref('test/ldr2').set(detteRestanteLitres)
+         firebase.database().ref('paiements/BERNARD CHIBARAMA/amount').set(0)
+         } else {
+       console.log('La valeur existante est invalide.');
+       }
+      
+       database.ref("CDF/BERNARD CHIBARAMA").on("value", (snapshot) => {
+        var CDF = snapshot.val();
+        if (CDF === 0){
+        firebase.database().ref('recev/etat2').set(1)
+        sendElementsToFirebase('elements/bouton2', null); // Supprimer les données
+        }
+       
+        });
+       
+     });
+     });
+
+            // Écoute les modifications dans le premier lien
+        firebase.database().ref('CDF/NESTOR KIBUKA').on('value', function(snapshot) {
+        var comp = snapshot.val();
+
+        if (comp === 0) {
+          firebase.database().ref('recev/etat').set(1)
+        }
+
+       // Autres actions à effectuer en fonction de la valeur de 'comp'...
+      });
+
+         // Écoute les modifications dans le premier lien
+        firebase.database().ref('CDF/BERNARD CHIBARAMA').on('value', function(snapshot) {
+        var comp = snapshot.val();
+
+        if (comp === 0) {
+          firebase.database().ref('recev/etat2').set(1)
+        }
+
+       // Autres actions à effectuer en fonction de la valeur de 'comp'...
+      });
+
+    
+
+
+
+
+
+
+
+
+              // Récupération de la référence au champ du numéro de compteur
+              const numeroCompteurInput = document.getElementById('meterNumber');
+
+              // Ajout d'un écouteur d'événement sur le champ du numéro de compteur
+              numeroCompteurInput.addEventListener('input', () => {
+                const numeroCompteur = numeroCompteurInput.value;
+
+                // Récupération des données du client à partir du numéro de compteur
+                const compteurRef = firebase.database().ref('listeClients/' + numeroCompteur);
+                compteurRef.once('value')
+                  .then((snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                      // Remplissage automatique des champs du formulaire
+                      document.getElementById('clientName').value = data.nom;
+                      document.getElementById('phoneNumber').value = data.telephone;
+                      document.getElementById('address').value = data.adresse;
+                      meterNumber.style.border = '2px solid blue'; // Ajout de cette ligne
+                      meterNumber.style.outline = 'none'; // Ajouter cette ligne pour masquer la bordure bleue
+                    }
+                    else {
+                        // Si le numéro de compteur n'est pas trouvé dans la base de données
+                        clientName.value = '';
+                        phoneNumber.value = '';
+                        address.value = '';
+                        meterNumber.style.border = '2px solid red'; // Ajout de cette ligne
+                        meterNumber.style.outline = 'none'; // Ajouter cette ligne pour masquer la bordure bleue
+                            }
+                  })
+                  .catch((error) => {
+                    console.error('Erreur lors de la récupération des données :', error);
+                  });
+              });
+
+
+
+
+
+  </script>
+    <script src="menu.js"></script>
+</body>
+</html>
