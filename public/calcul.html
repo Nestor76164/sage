@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+          authDomain: "esp32-b9013.firebaseapp.com",
+          databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "esp32-b9013",
+          storageBucket: "esp32-b9013.appspot.com",
+          messagingSenderId: "547189202345",
+          appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+        };
+      
+        // Initialize Firebase
+        //const app = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Écoute les modifications dans le premier lien
+        firebase.database().ref('paiements/nestor/amount').on('value', function(snapshot) {
+        var newAmount = snapshot.val();
+
+        // Récupère la valeur existante du deuxième lien
+        firebase.database().ref('CDF/nestor').once('value', function(snapshot) {
+         var existingValue = snapshot.val();
+    
+        // Vérifie si la valeur existante est valide et effectue la soustraction
+        if (existingValue !== null && !isNaN(existingValue)) {
+      var result = existingValue - newAmount;
+
+      // Met à jour la valeur dans le deuxième lien
+      firebase.database().ref('CDF/nestor').set(result)
+        .then(function() {
+          console.log('Mise à jour réussie !');
+        })
+        .catch(function(error) {
+          console.error('Erreur lors de la mise à jour :', error);
+        });
+         } else {
+       console.log('La valeur existante est invalide.');
+     }
+    });
+    });
+
+      </script>
+</body>
+</html>

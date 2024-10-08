@@ -1,0 +1,90 @@
+/* CSS */
+body {
+  background-color: #cbcbcb;
+  font-family: Arial, sans-serif;
+  margin: 0px;
+}
+
+#tableContainer {
+  background-color: #f2f2f2;
+  padding: 5px;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+#paymentTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#paymentTable th,
+#paymentTable td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#paymentTable th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+#paymentTableBody tr td:first-child {
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+  #paymentTable,
+  #paymentTable thead,
+  #paymentTable tbody,
+  #paymentTable tr,
+  #paymentTable th,
+  #paymentTable td {
+    display: block;
+  }
+
+  #paymentTable thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+    #paymentTable tr {
+      border: 1px solid #c1b5b5;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      background-color: #b1aaaa;
+      padding: 10px;
+    }
+
+  #paymentTable td {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  #paymentTable td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  #paymentTable td:nth-of-type(1):before { content: "N°"; }
+  #paymentTable td:nth-of-type(2):before { content: "Noms du client :"; }
+  #paymentTable td:nth-of-type(3):before { content: "Numéro de téléphone :"; }
+  #paymentTable td:nth-of-type(4):before { content: "Adresse :"; }
+  #paymentTable td:nth-of-type(5):before { content: "Numéro du compteur :"; }
+  #paymentTable td:nth-of-type(6):before { content: "dette (CDF) :"; }
+  #paymentTable td:nth-of-type(7):before { content: "Date de desactivation :"; }
+}

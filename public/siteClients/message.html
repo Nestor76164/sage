@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesM.css">
+    <title>message</title>
+</head>
+<body>
+
+  <!-- Conteneur de chat -->
+  <div class="chat-container" id="chatContainer">
+    <h1>Chat</h1>
+    <h2> </h2>
+    <!-- Messages -->
+    <div class="message received">
+      Bonjour cher abonné, nous espérons que vous allez bien. Nous vous souhaitons un bon dimanche sous la benediction du seigneur. si vous rencontrez un problème, le chat est à votre disposition pour faciliter la communication.
+    </div>
+
+    <div class="message sent">
+      Nous sommes en train d'examminer les fonctions du compteur. en cas de problème, nous reviendrons vers vous.
+    </div>
+
+    <div class="message received">
+      Merci cher abonné
+    </div>
+
+  </div>
+
+  <!-- Champ de saisie -->
+  <div class="input-container">
+    <input type="text" id="messageInput" placeholder="Tapez votre message...">
+    <button id="sendButton">Envoyer</button>
+  </div>
+
+
+    <div class="menu">
+        <a href="index1.html" class="menu-icon menu-icon-home" ><i class="fas fa-home"></i></a>
+        <a href="seting.html" class="menu-icon menu-icon-seting" ><i class="fas fa-chart-bar"></i></a> 
+        <a href="notification.html" class="menu-icon menu-icon-notification" ><i class="fas fa-bell"></i></a>
+        <a href="message.html" class="menu-icon menu-icon-message" ><i class="fas fa-envelope"></i></a>  
+        <a href="user.html" class="menu-icon menu-icon-user" ><i class="fas fa-user"></i></a> 
+      </div>
+      
+      <style>
+  .menu-icon-message {
+  font-size: 40px;
+  color: rgb(17, 30, 226);
+
+}
+    </style>
+     <script>
+        // Fonction pour envoyer un message
+        document.getElementById('sendButton').addEventListener('click', function() {
+          const messageInput = document.getElementById('messageInput');
+          const messageText = messageInput.value;
+    
+          if (messageText.trim() !== '') {
+            const chatContainer = document.getElementById('chatContainer');
+            
+            // Créer un nouvel élément de message
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('message', 'sent');
+            newMessage.textContent = messageText;
+            
+            // Ajouter le nouveau message au conteneur de chat
+            chatContainer.appendChild(newMessage);
+    
+            // Réinitialiser le champ de saisie
+            messageInput.value = '';
+    
+            // Faire défiler vers le bas pour afficher le dernier message
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          }
+        });
+      </script>
+</body>
+</html>

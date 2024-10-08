@@ -1,0 +1,108 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.chat-container {
+  flex: 1;
+  width: 100%; /* Utilise toute la largeur de la page */
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Permettre le défilement si le contenu dépasse */
+}
+
+.message {
+  background-color: #dcf8c6;
+  color: #333;
+  padding: 10px;
+  border-radius: 20px;
+  position: relative;
+  max-width: 70%;
+  margin-bottom: 10px;
+  font-size: 16px;
+  clear: both;
+}
+
+.message.sent {
+  background-color: #dcf8c6;
+  margin-left: auto;
+}
+
+.message.received {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* Pointe pour messages envoyés */
+.message.sent:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #dcf8c6;
+  border-bottom: 0;
+  border-right: 0;
+  margin-right: -10px;
+  margin-bottom: -10px;
+}
+
+/* Pointe pour messages reçus */
+.message.received:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #fff;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -10px;
+  margin-bottom: -10px;
+}
+
+/* Champ de saisie */
+.input-container {
+  display: flex;
+  width: 100%; /* Utilise toute la largeur de la page */
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 80px;
+}
+
+.input-container input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.input-container button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.input-container button:hover {
+  background-color: #218838;
+}
+

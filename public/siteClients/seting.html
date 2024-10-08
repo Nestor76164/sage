@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="barre/graph.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
+    <title>seting</title>
+</head>
+<body>
+
+    <h1>SUIVI INTERACTIF DE LA CONSOMMATION</h1>
+
+    <div class="chart-container">
+        <h2>Consommation journalière</h2>
+        <canvas id="heartRateChart1"></canvas>
+        <h2>Consommation hebdomadaire</h2>
+        <canvas id="heartRateChart2"></canvas>
+        <h2>Consommation mensuelle</h2>
+        <canvas id="heartRateChart3"></canvas>
+    </div>
+
+    <div class="menu">
+        <a href="index1.html" class="menu-icon menu-icon-home" ><i class="fas fa-home"></i></a>
+        <a href="seting.html" class="menu-icon menu-icon-seting" ><i class="fas fa-chart-bar"></i></a> 
+        <a href="notification.html" class="menu-icon menu-icon-notification" ><i class="fas fa-bell"></i></a>
+        <a href="message.html" class="menu-icon menu-icon-message" ><i class="fas fa-envelope"></i></a>  
+        <a href="user.html" class="menu-icon menu-icon-user" ><i class="fas fa-user"></i></a> 
+      </div>
+
+      <style>
+  .menu-icon-seting {
+  font-size: 40px;
+  color: rgb(17, 30, 226);
+}
+    </style>
+        <script src="barre/graph.js"></script>
+</body>
+</html>
