@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Départs</title>
+  <link rel="stylesheet" href="stylesOp.css">
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="flight-board-container">
+  <div class="flight-board">
+    <div class="header">
+      <img src="image1.jpg" alt="">
+      <h1 class="title">DEPARTS <span>DEPARTURES</span></h1>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>COMPAGNIES <span>COMPANIES</span></th>
+          <th>DESTINATION <span>DESTINATION</span></th>
+          <th>HORAIRE <span>TIME</span></th>
+          <th>VOL <span>FLIGHT</span></th>
+          <th>OBSERVATIONS <span>REMARKS</span></th>
+          <th>ACTION <span>ACTION</span></th>
+        </tr>
+      </thead>
+      <tbody id="departTable">
+        <!-- Ligne 1 -->
+        <tr id="line1">
+          <form>
+            <td>
+              <input type="text" name="company" value="CAA" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="destination" value="GOMA" placeholder="Destination">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:38" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="AF5743" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+        <!-- Ligne 2 -->
+        <tr id="line2">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+                <!-- Ligne 3 -->
+                <tr id="line3">
+                  <form>
+                    <td>
+                      <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+                    </td>
+                    <td>
+                      <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+                    </td>
+                    <td>
+                      <input type="text" name="time" value="12:56" placeholder="Horaire">
+                    </td>
+                    <td>
+                      <input type="text" name="flight" value="BA 913" placeholder="Vol">
+                    </td>
+                    <td>
+                      <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+                    </td>
+                    <td>
+                      <button type="submit">Valider</button>
+                    </td>
+                  </form>
+                </tr>
+                        <!-- Ligne 4 -->
+        <tr id="line4">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+                <!-- Ligne 5 -->
+                <tr id="line5">
+                  <form>
+                    <td>
+                      <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+                    </td>
+                    <td>
+                      <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+                    </td>
+                    <td>
+                      <input type="text" name="time" value="12:56" placeholder="Horaire">
+                    </td>
+                    <td>
+                      <input type="text" name="flight" value="BA 913" placeholder="Vol">
+                    </td>
+                    <td>
+                      <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+                    </td>
+                    <td>
+                      <button type="submit">Valider</button>
+                    </td>
+                  </form>
+                </tr>
+                        <!-- Ligne 6 -->
+        <tr id="line6">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+                <!-- Ligne 7 -->
+                <tr id="line7">
+                  <form>
+                    <td>
+                      <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+                    </td>
+                    <td>
+                      <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+                    </td>
+                    <td>
+                      <input type="text" name="time" value="12:56" placeholder="Horaire">
+                    </td>
+                    <td>
+                      <input type="text" name="flight" value="BA 913" placeholder="Vol">
+                    </td>
+                    <td>
+                      <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+                    </td>
+                    <td>
+                      <button type="submit">Valider</button>
+                    </td>
+                  </form>
+                </tr>
+                        <!-- Ligne 8 -->
+        <tr id="line8">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+                <!-- Ligne 9 -->
+                <tr id="line9">
+                  <form>
+                    <td>
+                      <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+                    </td>
+                    <td>
+                      <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+                    </td>
+                    <td>
+                      <input type="text" name="time" value="12:56" placeholder="Horaire">
+                    </td>
+                    <td>
+                      <input type="text" name="flight" value="BA 913" placeholder="Vol">
+                    </td>
+                    <td>
+                      <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+                    </td>
+                    <td>
+                      <button type="submit">Valider</button>
+                    </td>
+                  </form>
+                </tr>
+                        <!-- Ligne 10 -->
+        <tr id="line2">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="destination" value="MBUJIMAYI" placeholder="Destination">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+  <div class="flight-board">
+    <div class="header">
+      <img src="image2.jpg" alt="">
+      <h1 class="title">ARRIVÉES <span>ARRIVALS</span></h1>
+    </div>
+    <table>
+      <!-- Contenu du tableau 2 (nouveau) -->
+      <thead>
+        <tr>
+          <th>COMPAGNIES <span>COMPANIES</span></th>
+          <th>PROVENANCE <span>FROM</span></th>
+          <th>HORAIRE <span>TIME</span></th>
+          <th>VOL <span>FLIGHT</span></th>
+          <th>OBSERVATIONS <span>REMARKS</span></th>
+          <th>ACTION <span>ACTION</span></th>
+        </tr>
+      </thead>
+      <tbody id="arriveTable">
+        <!-- Ligne 1 -->
+        <tr id="line1">
+          <form>
+            <td>
+              <input type="text" name="company" value="CAA" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="from" value="GOMA" placeholder="provenance">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:38" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="AF5743" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+        <!-- Ligne 2 -->
+        <tr id="line2">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+                <!-- Ligne 3 -->
+                <tr id="line3">
+                  <form>
+                    <td>
+                      <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+                    </td>
+                    <td>
+                      <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+                    </td>
+                    <td>
+                      <input type="text" name="time" value="12:56" placeholder="Horaire">
+                    </td>
+                    <td>
+                      <input type="text" name="flight" value="BA 913" placeholder="Vol">
+                    </td>
+                    <td>
+                      <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+                    </td>
+                    <td>
+                      <button type="submit">Valider</button>
+                    </td>
+                  </form>
+                </tr>
+                        <!-- Ligne 4 -->
+        <tr id="line4">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+                <!-- Ligne 5 -->
+                <tr id="line5">
+                  <form>
+                    <td>
+                      <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+                    </td>
+                    <td>
+                      <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+                    </td>
+                    <td>
+                      <input type="text" name="time" value="12:56" placeholder="Horaire">
+                    </td>
+                    <td>
+                      <input type="text" name="flight" value="BA 913" placeholder="Vol">
+                    </td>
+                    <td>
+                      <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+                    </td>
+                    <td>
+                      <button type="submit">Valider</button>
+                    </td>
+                  </form>
+                </tr>
+                        <!-- Ligne 6 -->
+        <tr id="line6">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+                <!-- Ligne 7 -->
+                <tr id="line7">
+                  <form>
+                    <td>
+                      <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+                    </td>
+                    <td>
+                      <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+                    </td>
+                    <td>
+                      <input type="text" name="time" value="12:56" placeholder="Horaire">
+                    </td>
+                    <td>
+                      <input type="text" name="flight" value="BA 913" placeholder="Vol">
+                    </td>
+                    <td>
+                      <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+                    </td>
+                    <td>
+                      <button type="submit">Valider</button>
+                    </td>
+                  </form>
+                </tr>
+                        <!-- Ligne 8 -->
+        <tr id="line8">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+                <!-- Ligne 9 -->
+                <tr id="line9">
+                  <form>
+                    <td>
+                      <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+                    </td>
+                    <td>
+                      <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+                    </td>
+                    <td>
+                      <input type="text" name="time" value="12:56" placeholder="Horaire">
+                    </td>
+                    <td>
+                      <input type="text" name="flight" value="BA 913" placeholder="Vol">
+                    </td>
+                    <td>
+                      <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+                    </td>
+                    <td>
+                      <button type="submit">Valider</button>
+                    </td>
+                  </form>
+                </tr>
+                        <!-- Ligne 10 -->
+        <tr id="line2">
+          <form>
+            <td>
+              <input type="text" name="company" value="Air Kasai" placeholder="Compagnie">
+            </td>
+            <td>
+              <input type="text" name="from" value="MBUJIMAYI" placeholder="provenance">
+            </td>
+            <td>
+              <input type="text" name="time" value="12:56" placeholder="Horaire">
+            </td>
+            <td>
+              <input type="text" name="flight" value="BA 913" placeholder="Vol">
+            </td>
+            <td>
+              <input type="text" name="remarks" value="ANNULE" placeholder="Observation">
+            </td>
+            <td>
+              <button type="submit">Valider</button>
+            </td>
+          </form>
+        </tr>
+        
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+  <script type="module">
+    // Importation de Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+  
+    // Votre configuration Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+      authDomain: "esp32-b9013.firebaseapp.com",
+      databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "esp32-b9013",
+      storageBucket: "esp32-b9013.appspot.com",
+      messagingSenderId: "547189202345",
+      appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+    };
+  
+    // Initialisation de Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+  
+    // Fonction pour enregistrer les données dans Firebase
+    function saveData(line, data) {
+      const lineRef = ref(database, 'Depart/ligne' + line);
+      set(lineRef, data);
+    } 
+  
+    // Fonction de soumission du formulaire
+    function handleSubmit(event, line) {
+      event.preventDefault();
+  
+      const company = event.target.company.value;
+      const destination = event.target.destination.value;
+      const time = event.target.time.value;
+      const flight = event.target.flight.value;
+      const remarks = event.target.remarks.value;
+  
+      // Crée un objet avec les données du formulaire
+      const data = {
+        NomCompagnie: company,
+        NomDestination: destination,
+        Horaire: time,
+        vol: flight,
+        observation: remarks
+      };
+  
+      // Sauvegarder les données dans Firebase
+      saveData(line, data);
+  
+      // Mettre à jour l'affichage avec les nouvelles données
+      updateRowDisplay(line, data);
+    }
+
+
+  
+    // Fonction pour mettre à jour l'affichage
+    function updateRowDisplay(line, data) {
+      const row = document.getElementById('line' + line);
+      row.querySelector('[name="company"]').value = data.NomCompagnie;
+      row.querySelector('[name="destination"]').value = data.NomDestination;
+      row.querySelector('[name="time"]').value = data.Horaire;
+      row.querySelector('[name="flight"]').value = data.vol;
+      row.querySelector('[name="remarks"]').value = data.observation;
+    }
+  
+    // Ajouter les écouteurs d'événements sur les boutons de validation
+    document.querySelectorAll('form').forEach((form, index) => {
+      form.addEventListener('submit', function(event) {
+        handleSubmit(event, index + 1);
+      });
+    });
+
+
+
+
+
+
+
+// Fonction pour enregistrer les données dans Firebase
+function saveDataArrive(line, data) {
+    const lineRef = ref(database, 'Arrive/ligne' + line);
+    set(lineRef, data);
+  }
+
+  // Fonction de soumission du formulaire pour la table d'arrivée
+  function handleArriveSubmit(event, line) {
+    event.preventDefault();
+
+    const company = event.target.company.value;
+    const from = event.target.from.value;
+    const time = event.target.time.value;
+    const flight = event.target.flight.value;
+    const remarks = event.target.remarks.value;
+
+    // Crée un objet avec les données du formulaire
+    const data = {
+      NomCompagnie: company,
+      Provenance: from,
+      Horaire: time,
+      vol: flight,
+      observation: remarks
+    };
+
+    // Sauvegarder les données dans Firebase
+    saveDataArrive(line, data);
+
+    // Mettre à jour l'affichage avec les nouvelles données
+    updateArriveRowDisplay(line, data);
+  }
+
+  // Fonction pour mettre à jour l'affichage
+  function updateArriveRowDisplay(line, data) {
+    const row = document.getElementById('arriveLine' + line);
+    row.querySelector('[name="company"]').value = data.NomCompagnie;
+    row.querySelector('[name="from"]').value = data.Provenance;
+    row.querySelector('[name="time"]').value = data.Horaire;
+    row.querySelector('[name="flight"]').value = data.vol;
+    row.querySelector('[name="remarks"]').value = data.observation;
+  }
+
+  // Ajouter les écouteurs d'événements sur les formulaires de la deuxième table
+  document.querySelectorAll('#arriveTable form').forEach((form, index) => {
+    form.addEventListener('submit', function(event) {
+      handleArriveSubmit(event, index + 1);
+    });
+  });
+
+
+
+
+  </script>
+  
+</body>
+</html>

@@ -1,119 +1,256 @@
-h1 {
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 0 1rem;
+}
+
+.hero .container h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero .container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.hero .btn {
+  display: inline-block;
+  background-color: #ffc107;
+  color: #111;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.hero .btn:hover {
+  background-color: #e0a800;
+}
+
+/* Services Section */
+.services {
+  padding: 2rem 1rem;
   text-align: center;
 }
 
-.table-responsive {
-  overflow-x: auto;
+.services h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
+.cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-th, td {
-  text-align: left;
-  padding: 8px;
-  white-space: nowrap;
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-th {
-  background-color: #4CAF50;
-  color: white;
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-table tr {
-  background-color: #fcf2f2; /* Couleur de fond pour les lignes impaires */
-  border-bottom: 1px solid #a9a8a8; /* Bordure inférieure pour toutes les lignes */
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Style pour la dernière ligne */
-table tr:last-child {
-  border-bottom: none; /* Supprime la bordure inférieure pour la dernière ligne */
+.card p {
+  font-size: 1rem;
+  color: #555;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  border-radius: 17px;
-  overflow: hidden;
+/* Footer */
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
 }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
 
-.slider {
-  position: absolute;
+/*------------------------------------------------------------*/
+/* Bouton flottant dans le coin supérieur droit */
+.floating-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #ffc107;
+  color: #111;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 50px;
   cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s;
+  z-index: 1000; /* Assure qu'il reste visible */
+}
+
+.floating-btn:hover {
+  background-color: #e0a800;
+}
+
+/* Modal (formulaire centré) */
+.modal {
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 17px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 50%;
+.modal-content {
+  background: #868686;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+.modal-content h3 {
+  margin-bottom: 1.5rem;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+.modal-content label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+/* Style pour le champ de saisie */
+.modal-content input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-.observ1 {
-  color: #2196F3;
+.modal-content input::placeholder {
+  color: #aaa;
+  font-style: italic;
 }
 
-.observ0 {
-  color: #ff0000;
-}
 
-.observ-placeholder {
+.modal-content .btn {
   display: inline-block;
-  width: 100px;
+  background-color: #ffc107;
+  color: #111;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background 0.3s;
 }
 
-.default-text {
-  color: red;
+.modal-content .btn:hover {
+  background-color: #e0a800;
 }
 
-@media (max-width: 768px) {
-  table {
-      font-size: 14px;
-  }
+/* Bouton de fermeture */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #9c0606;
+}
 
-  th, td {
-      padding: 6px;
-  }
+h3{
+  color: #ffffff;
+}
 
-  .observ-placeholder {
-      width: 80px;
-  }
+
+
+
+
+/* Boîte de notification personnalisée */
+.custom-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  z-index: 1000;
+  display: none; /* Masqué par défaut */
+}
+
+.custom-alert p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.custom-alert .btn {
+  background-color: #ffc107;
+  color: #111;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.custom-alert .btn:hover {
+  background-color: #e0a800;
 }

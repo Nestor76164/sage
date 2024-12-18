@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #2e2e2e;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .flight-board {
+    text-align: center;
+    background-color: #111;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    height: 90vh;
+    overflow-y: auto;
+    border-radius: 10px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #ffffff;
+  }
+  
+  .title span {
+    font-size: 1rem;
+    color: #f8d707aa;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  thead th {
+    background-color: #444;
+    padding: 10px;
+    font-size: 1rem;
+    border-bottom: 2px solid #666;
+  }
+  
+  thead th span {
+    display: block;
+    font-size: 0.8rem;
+    color: #f8d707aa;
+  }
+  
+  tbody td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #555;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #222;
+  }
+  
+  tbody td {
+    color: #f8d707; /* Default for 'ANNULE' */
+  }
+  
+
+  
+  tbody td:last-child:contains('ANNULE') {
+    color: rgb(168, 139, 139); /* highlight Red */
+  }
+
+  /*sssssssssss*/
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espace entre l'image et le titre */
+    margin-bottom: 20px; /* Espacement sous le titre */
+  }
+  
+  .header img {
+    width: 60px; /* Ajustez la taille de l'image si nécessaire */
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  

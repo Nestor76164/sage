@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>départ</title>
+  <link rel="stylesheet" href="styles1.css">
+
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <div class="flight-board">
+        <div class="header">
+          <img src="image1.jpg" alt="">
+          <h1 class="title">DEPARTS <span>DEPARTURES</span></h1>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>COMPAGNIES <span>COMPANIES</span></th>
+              <th>DESTINATION <span>DESTINATION</span></th>
+              <th>HORAIRE <span>TIME</span></th>
+              <th>VOL <span>FLIGHT</span></th>
+              <th>OBSERVATIONS <span>REMARKS</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td id="NomCompagnie1" >__</td><td id="NomDestination1">__</td><td id="Horaire1">__</td><td id="vol1">__</td><td id="observation1">__</td></tr>
+            <tr><td id="NomCompagnie2" >__</td><td id="NomDestination2">__</td><td id="Horaire2">__</td><td id="vol2">__</td><td id="observation2">__</td></tr>
+            <tr><td id="NomCompagnie3" >__</td><td id="NomDestination3">__</td><td id="Horaire3">__</td><td id="vol3">__</td><td id="observation3">__</td></tr>
+            <tr><td id="NomCompagnie4" >__</td><td id="NomDestination4">__</td><td id="Horaire4">__</td><td id="vol4">__</td><td id="observation4">__</td></tr>
+            <tr><td id="NomCompagnie5" >__</td><td id="NomDestination5">__</td><td id="Horaire5">__</td><td id="vol5">__</td><td id="observation5">__</td></tr>
+            <tr><td id="NomCompagnie6" >__</td><td id="NomDestination6">__</td><td id="Horaire6">__</td><td id="vol6">__</td><td id="observation6">__</td></tr>
+            <tr><td id="NomCompagnie7" >__</td><td id="NomDestination7">__</td><td id="Horaire7">__</td><td id="vol7">__</td><td id="observation7">__</td></tr>
+            <tr><td id="NomCompagnie8" >__</td><td id="NomDestination8">__</td><td id="Horaire8">__</td><td id="vol8">__</td><td id="observation8">__</td></tr>
+            <tr><td id="NomCompagnie9" >__</td><td id="NomDestination9">__</td><td id="Horaire9">__</td><td id="vol9">__</td><td id="observation9">__</td></tr>
+            <tr><td id="NomCompagnie10" >__</td><td id="NomDestination10">__</td><td id="Horaire10">__</td><td id="vol10">__</td><td id="observation10">__</td></tr>
+          </tbody>
+        </table>
+      </div>
+     
+      
+
+
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        const firebaseConfig = {
+          apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+          authDomain: "esp32-b9013.firebaseapp.com",
+          databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "esp32-b9013",
+          storageBucket: "esp32-b9013.appspot.com",
+          messagingSenderId: "547189202345",
+          appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+        };
+      
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+      
+        // Fonction générique pour lire les données
+        function updateField(refPath, elementId) {
+          database.ref(refPath).on("value", (snapshot) => {
+            const value = snapshot.val();
+            document.getElementById(elementId).textContent = value || "__";
+          });
+        }
+      
+        // Mettre à jour les champs dynamiquement
+        const lignes = 10; 
+        for (let i = 1; i <= lignes; i++) {
+          updateField(`Depart/ligne${i}/NomCompagnie`, `NomCompagnie${i}`);
+          updateField(`Depart/ligne${i}/NomDestination`, `NomDestination${i}`);
+          updateField(`Depart/ligne${i}/Horaire`, `Horaire${i}`);
+          updateField(`Depart/ligne${i}/vol`, `vol${i}`);
+          updateField(`Depart/ligne${i}/observation`, `observation${i}`);
+        }
+      </script>
+      
+
+
+
+
+</body>
+</html>
