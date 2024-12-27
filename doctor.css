@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1d1b3d;
+    text-align: center;
+}
+
+header {
+    background-color: #0f132f;
+    color: white;
+    padding: 1rem;
+    height: 80px;
+}
+header h1{
+    position: relative;
+    bottom: 125px;
+    font-size: 1.4em;
+    font-weight: 400 ;
+}
+
+.patient-list {
+    list-style: none;
+    padding: 0;
+}
+
+.patient-list li {
+    background-color: #e0e4e8;
+    padding: 1rem;
+    margin: 1rem auto;
+    width: 200px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.patient-list li a{
+    text-decoration-line: none;
+    color: black;
+}
+
+.patient-list li:hover {
+    background-color: #cdd2d8;
+}
+.faceup img{
+    display: flex;
+    border-radius:50%;
+    position: relative; 
+    left: 360px;
+    top: -75px ;
+
+}
+
+.logo h3{
+    display: flex;
+    position: relative;
+    bottom: 50px;
+    top: 80px;
+
+}
+.logo img {
+    display: flex;
+    border-radius:50%;
+    width: 65px;
+    height: 60px;
+}
+.user_profile h3{
+    position: relative;
+    padding:0;
+    margin: 0;
+    font-size: 0.8em;
+    font-weight: 300;
+    top: -65px;
+    left: 180px;
+}

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tab.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Document</title>
+
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+
+</head>
+<body class="light-mode">
+
+    <div id="notification" class="hidden">
+        <span class="material-icons-sharp attention-icon">warning</span>
+        <span id="notification-message"></span>
+    </div>
+    
+
+    <!-- Header avec menu toggle, mode et nom utilisateur -->
+    <header>
+        <div class="header-content">
+            <!-- Icone Menu Toggle -->
+            <div class="menu-toggle" id="menuToggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <!-- Mode sombre/clair -->
+            <button id="modeToggle">
+                <div class="card-header">
+                    <span class="material-icons-sharp">
+                        dark_mode
+                    </span>
+                </div>
+            </button>
+
+            <!-- Nom de l'utilisateur -->
+            <div class="user-info">
+                <img src="avatar_angel.png" height="50px" width="50px" alt="">
+                <p>Jane</p>
+                <p>smith</p>
+            </div>
+        </div>
+
+        <!-- Menu déroulant du toggle -->
+        <nav id="menu" class="hidden">
+            <ul>
+                <li><a href="#suggestions">Suggestions</a></li>
+                <li><a href="#notifications">Notifications</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#logout">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        <h1>Moniteur des Paramètres Vitaux</h1>
+        <div class="param-container">
+            <div class="parametre">
+                <h2>Température</h2>
+                <div class="card-header">
+                    <span class="material-icons-sharp">
+                        thermostat
+                    </span>
+                </div>
+                <p id="temperature">34.5°C</p>
+            </div>
+            <div class="parametre">
+                <h2>F.Cardiaque</h2>
+                <div class="card-header">
+                    <span class="material-icons-sharp">
+                        favorite_border
+                    </span>
+                </div>
+                <p id="cardiaque">0 bpm</p>
+            </div>
+            <div class="parametre">
+                <h2>Saturation en Oxygène</h2>
+                <div class="card-header">
+                    <span class="material-icons-sharp">
+                        egg
+                    </span>
+                </div>
+                <p id="spo2">0%</p>
+            </div>
+            <div class="parametre">
+                <h2>Pression Artérielle</h2>
+                <div class="card-header">
+                    <span class="material-icons-sharp">
+                        tire_repair
+                    </span>
+                </div>
+                <p id="pression">120/80 mmHg</p>
+            </div>
+        </div>
+    </main>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+          authDomain: "esp32-b9013.firebaseapp.com",
+          databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "esp32-b9013",
+          storageBucket: "esp32-b9013.appspot.com",
+          messagingSenderId: "547189202345",
+          appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+        };
+      
+        // Initialize Firebase
+        //const app = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+        /*const messaging = firebase.messaging();
+        messaging.requestPermission()
+        .then(function(){
+          console.log('vous avez la permission');
+        })
+        .catch(function(err){
+          console.log('erreur de la permission');
+        })*/
+      
+        const database = firebase.database();
+      
+      
+       // Référence au conteneur de notification
+const notification = document.getElementById("notification");
+const notificationMessage = document.getElementById("notification-message");
+
+// Lecture de la fréquence cardiaque (bpm)
+database.ref("BIOMED/bpm").on("value", (snapshot) => {
+    const cardiaque = snapshot.val();
+    document.getElementById("cardiaque").textContent = cardiaque + " bpm";
+
+    // Vérifie si la fréquence cardiaque est inférieure au seuil
+    if (cardiaque < 60) {
+        ajouterMessageNotification("- Fréquence cardiaque inférieure à la normale");
+    } else {
+        retirerMessageNotification("- Fréquence cardiaque inférieure à la normale");
+    }
+    if (cardiaque > 100) {
+        ajouterMessageNotification("- Fréquence cardiaque supérieure à la normale");
+    } else {
+        retirerMessageNotification("- Fréquence cardiaque supérieure à la normale");
+    }
+});
+
+// Lecture de la SpO2
+database.ref("BIOMED/sp02").on("value", (snapshot) => {
+    const spo2 = snapshot.val();
+    document.getElementById("spo2").textContent = spo2 + " %";
+
+    // Vérifie si la saturation en oxygène est inférieure au seuil
+    if (spo2 < 95) {
+        ajouterMessageNotification("- SpO2 inférieur à la normale");
+    } else {
+        retirerMessageNotification("- SpO2 inférieur à la normale");
+    }
+    if (spo2 > 100) {
+        ajouterMessageNotification("- SpO2 supérieur à la normale");
+    } else {
+        retirerMessageNotification("- SpO2 supérieur à la normale");
+    }
+});
+
+// Fonction pour ajouter un message unique à la notification
+function ajouterMessageNotification(message) {
+    if (!notificationMessage.innerHTML.includes(message)) {
+        notificationMessage.innerHTML += message + "<br>";
+    }
+
+    // Affiche la notification si elle n'est pas vide
+    notification.style.display = "flex";
+}
+
+// Fonction pour retirer un message spécifique de la notification
+function retirerMessageNotification(message) {
+    // Retire le message de la notification
+    notificationMessage.innerHTML = notificationMessage.innerHTML.replace(message + "<br>", "");
+
+    // Cache la notification si aucun message n'est présent
+    if (notificationMessage.innerHTML.trim() === "") {
+        notification.style.display = "none";
+    }
+}
+
+
+  // Simulation de la valeur de la pression artérielle
+  database.ref("BIOMED/bpm").on("value", (snapshot) => {
+    const bpm = snapshot.val();
+    let pression;
+
+    if (bpm === 0) {
+        pression = "0/0";
+        ajouterMessageNotification("- pas de Pression artérielle détectée !");
+        retirerMessageNotification("- Hypertension détectée !");
+        retirerMessageNotification("- Pression artérielle basse détectée !");
+        document.getElementById("pression").textContent = pression + " mmHg";
+    } else {
+        const systolic = Math.round(70 + bpm / 2);
+        const diastolic = Math.round(45 + bpm / 3);
+        pression = `${systolic}/${diastolic}`;
+
+        document.getElementById("pression").textContent = pression + " mmHg";
+
+        // Vérifie si systolic et diastolic sont en dessous d'un certain seuil
+        if (systolic < 90 && diastolic < 60) {
+            // Insérer ici une instruction ou une alerte si la pression est basse
+            retirerMessageNotification("- pas de Pression artérielle détectée !");
+            ajouterMessageNotification("- Pression artérielle basse détectée !");
+            retirerMessageNotification("- Hypertension détectée !");
+        } else if (systolic > 120 || diastolic > 90) {
+            console.log("Hypertension détectée !");
+            // Insérer ici une instruction ou une alerte si la pression est élevée
+            ajouterMessageNotification("- Hypertension détectée !");
+            retirerMessageNotification("- Pression artérielle basse détectée !");
+            retirerMessageNotification("- pas de Pression artérielle détectée !");
+        }
+        else {
+        retirerMessageNotification("- Hypertension détectée !");
+        retirerMessageNotification("- Pression artérielle basse détectée !");
+        retirerMessageNotification("- pas de Pression artérielle détectée !");
+    }
+    }   
+
+});
+
+
+
+
+
+              // Simulation des valeurs pour les paramètres vitaux
+let temperature = 45;
+//let cardiaque = 70;
+//let spo2 = 98;
+//let pression = "120/80";
+
+// Fonction pour simuler les changements des valeurs
+function miseAJourValeurs() {
+    temperature = (36.0 + Math.random() * 1.0).toFixed(1);
+    //cardiaque = Math.floor(65 + Math.random() * 10);
+    //spo2 = Math.floor(97 + Math.random() * 2);
+    //pression = `${Math.floor(110 + Math.random() * 10)}/${Math.floor(70 + Math.random() * 10)}`;
+
+    document.getElementById("temperature").textContent = temperature + "°C";
+    //document.getElementById("cardiaque").textContent = cardiaque + " bpm";
+    //document.getElementById("spo2").textContent = spo2 + "%";
+    //document.getElementById("pression").textContent = pression + " mmHg";
+}
+
+// Fonction pour ouvrir/fermer le menu
+document.getElementById('menuToggle').addEventListener("click", function() {
+    const menu = document.getElementById("menu");
+    // Vérification de l'état actuel du menu (visible ou non)
+    if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        menu.classList.add('show');
+    } else {
+        menu.classList.remove('show');
+        menu.classList.add('hidden');
+    }
+});
+
+// Fonction pour changer de mode clair à sombre
+document.getElementById("modeToggle").addEventListener("click", function() {
+    const body = document.body;
+    // Toggle entre le mode clair et le mode sombre
+    if (body.classList.contains('light-mode')) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+    } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+    }
+});
+
+// Mettre à jour les valeurs toutes les 2 secondes
+setInterval(miseAJourValeurs, 2000);
+
+
+      
+        </script>
+
+
+
+</body>
+
+</html>

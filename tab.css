@@ -1,0 +1,218 @@
+/* Styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #090b16;
+    color: #333333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Mode sombre */
+body.dark-mode {
+    background-color: #333;
+    color: #0b0a0a;
+}
+
+/* Styles pour le header */
+header {
+    background-color: #151838;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+header button {
+    border-radius: 50%;
+    position: relative;
+    left: 70px;
+    color: #202452;
+}
+#modeToggle {
+    background-color: #202452;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+/* Menu burger */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 24px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/* Barres du menu burger */
+.menu-toggle .bar {
+    height: 4px;
+    background-color: white;
+    margin: 2px 0;
+}
+
+/* Menu caché par défaut */
+.hidden {
+    display: none;
+}
+
+/* Menu visible */
+.show {
+    display: block;
+    background-color: #333;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    width: 150px;
+    z-index: 1; /* S'assurer que le menu soit visible au-dessus */
+}
+
+.show ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.show ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.show ul li a:hover {
+    background-color: #4CAF50;
+}
+
+/* Bouton mode sombre/clair */
+#modeToggle {
+    background-color: #343a53;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#modeToggle:hover {
+    background-color: #1d2133;
+}
+
+/* Nom de l'utilisateur */
+.user-info p {
+    margin: 0;
+    padding: 0 15px;
+    font-size: 18px;
+    color: white;
+}
+
+/* Styles pour les paramètres */
+main {
+    text-align: center;
+    padding: 20px;
+}
+main h1{
+    color: #dcdada;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+}
+
+.param-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+.parametre {
+    background-color: #203588aa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    transition: background-color 0.3s ease;
+}
+
+.parametre h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #ffffffca;
+}
+
+.parametre p {
+    font-size: 2em;
+    color: #ffffffca;
+
+}
+.user-info {
+    position: relative;
+    left: 240px;
+}
+.user-info img{
+    border-radius: 50%;
+    position: relative;
+    top: 17px;
+}
+.user-info p {
+    font-weight: 200;
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    right: 80px;
+    bottom: 30px;
+}
+
+/* Styles spécifiques pour le mode sombre dans les paramètres */
+body.dark-mode .parametre {
+    background-color: #555;
+    color: #fff;
+}
+.card-header span{
+    color:#a71919;
+}
+
+
+
+/* Styles pour la notification d'alerte */
+#notification {
+    display: flex;
+    align-items: center;
+    background-color: #ffcc00;
+    color: #333;
+    padding: 10px;
+    font-size: 1.2em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: top 0.3s ease;
+}
+
+/* Icône d'attention à gauche du message */
+.attention-icon {
+    color: #e60000;
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+/* Cacher la notification par défaut */
+.hidden {
+    display: none;
+}
+
+/* Afficher la notification */
+.show {
+    display: flex;
+}
