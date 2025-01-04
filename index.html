@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TempBeat_Dashboard</title>
+    <title>Custom Dashboard</title>
     <style>
         body {
             margin: 0;
@@ -81,14 +81,14 @@
         }
         .data-value span {
             margin-left: 10px;
-            font-size: 1.2em;
-            color: #666;
+            font-size: 0.8em;
+            color: #2f69ac;
         }
         .notifications div {
             background: #4a90e2;
             color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
+            padding: 5px 8px;
+            border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -104,15 +104,15 @@
             font-size: 0.9em;
             border-top: 1px solid #ddd;
         }
+
     </style>
 </head>
 <body>
     <header>
         <div class="menu-toggle">☰</div>
-        <h1>Tableau de bord</h1>
+        <h3>Tableau de bord</h3>
         <div class="notifications">
             <div id="bell">🔔 Notifications</div>
-            <div id="profile">👤 Profile</div>
         </div>
     </header>
     <nav id="side-menu">
@@ -122,10 +122,11 @@
         <a href="#contact">Contact</a>
     </nav>
     <div class="main-content">
-        <h2>Bienvenu(e) au TempBeat Dashboard</h2>
-        <p>Il s'agit de votre tableau de bord pour le suivi de la température et de la fréquence cardiaque. Utilisez le menu pour naviguer ou consulter les notifications.</p>
+        <h3>Bienvenu(e) au TempBeat Dashboard</h3>
+        <p>Il s'agit de votre tableau de bord pour le suivi de la température et de la fréquence cardiaque en temps réel</p>
+         <!-- <p>Il s'agit de votre tableau de bord pour le suivi de la température et de la fréquence cardiaque. Utilisez le menu pour naviguer ou consulter les notifications.</p>
 
-        <!-- Data Sections -->
+       Data Sections -->
         <div class="data-section">
             <h3>Température</h3>
             <p class="data-value">
@@ -157,11 +158,6 @@
         const bell = document.getElementById('bell');
         bell.addEventListener('click', () => {
             alert('You have no new notifications.');
-        });
-
-        const profile = document.getElementById('profile');
-        profile.addEventListener('click', () => {
-            alert('Profile settings are under development.');
         });
 
         // Function to simulate fetching data from a database
