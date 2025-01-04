@@ -3,43 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>doctor_page</title>
-    <link rel="stylesheet" href="doctor.css">
+    <title>Custom Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e3f2fd, #f4f5f7);
+            color: #333;
+        }
+        header {
+            background: #4a90e2;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .menu-toggle {
+            font-size: 1.8em;
+            cursor: pointer;
+        }
+        nav {
+            display: none;
+            flex-direction: column;
+            background: white;
+            position: fixed;
+            top: 65px;
+            left: 0;
+            width: 250px;
+            height: calc(100% - 65px);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            z-index: 9;
+        }
+        nav a {
+            text-decoration: none;
+            color: #4a90e2;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #f0f8ff;
+        }
+        .main-content {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 900px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .data-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .data-section h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .data-value {
+            font-size: 1.8em;
+            color: #4a90e2;
+            display: flex;
+            align-items: center;
+        }
+        .data-value span {
+            margin-left: 10px;
+            font-size: 1.2em;
+            color: #666;
+        }
+        .notifications div {
+            background: #4a90e2;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .notifications div:hover {
+            background: #357abd;
+        }
+        footer {
+            margin-top: 40px;
+            padding: 15px;
+            background: #f0f4f8;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-    
-</body>
-</html>
-<body>
     <header>
-        <div class="user_profile">
-            <div class="logo">
-                <img src="logg.png" alt="">
-                <h3>BioMonitor</h3>
-            </div>
-            <div class="faceup">
-                <img src="alliancedr.jpeg"  height="60px" width="60px"alt="">
-                <h3>Dr.Alliance</h3>
-            </div>
+        <div class="menu-toggle">☰</div>
+        <h1>Tableau de bord</h1>
+        <div class="notifications">
+            <div id="bell">🔔 Notifications</div>
+            <div id="profile">👤 Profile</div>
         </div>
-        <h1>Liste des Patients</h1>
     </header>
-    
-    <main>
-        <ul class="patient-list">
-            <li ><a href="tab.html">Jane Smith</a></li>
-            <li >John Doe</li>
-            <li >Robert Martin</li>
-            <li >Emily Davis</li>
-            <li >ruth cloe</li>
-            <li >patrick yan</li>
-            <li >ludovic hrtz</li>
-            <li >angel bahati</li>
-            <li >junior kess</li>
-            <li >grace born</li>
-        </ul>
-    </main>
+    <nav id="side-menu">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">À propos</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="main-content">
+        <h2>Bienvenu(e) au TempBeat Dashboard</h2>
+        <p>Il s'agit de votre tableau de bord pour le suivi de la température et de la fréquence cardiaque. Utilisez le menu pour naviguer ou consulter les notifications.</p>
 
+        <!-- Data Sections -->
+        <div class="data-section">
+            <h3>Température</h3>
+            <p class="data-value">
+                <span id="temperature">--</span>
+                <span>°C 🌡️</span>
+            </p>
+        </div>
+        <div class="data-section">
+            <h3>Fréquence cardiaque</h3>
+            <p class="data-value">
+                <span id="heart-rate">--</span>
+                <span>BPM ❤️</span>
+            </p>
+        </div>
+    </div>
 
+    <footer>
+        © 2025 TempBeat Dashboard. Fait par l'Ir(...tom nom...)
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sideMenu = document.getElementById('side-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            sideMenu.style.display = sideMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        const bell = document.getElementById('bell');
+        bell.addEventListener('click', () => {
+            alert('You have no new notifications.');
+        });
+
+        const profile = document.getElementById('profile');
+        profile.addEventListener('click', () => {
+            alert('Profile settings are under development.');
+        });
+
+        // Function to simulate fetching data from a database
+        function fetchData() {
+            const temperature = (Math.random() * 2 + 35).toFixed(1); // Random temp between 35 and 37
+            const heartRate = Math.floor(Math.random() * 40 + 60);  // Random BPM between 60 and 100
+
+            document.getElementById('temperature').textContent = temperature;
+            document.getElementById('heart-rate').textContent = heartRate;
+        }
+
+        // Fetch data every 5 seconds
+        setInterval(fetchData, 5000);
+
+        // Initial data fetch
+        fetchData();
+    </script>
 </body>
 </html>
