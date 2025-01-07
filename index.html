@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Dashboard</title>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
     <style>
         body {
             margin: 0;
@@ -130,14 +132,14 @@
         <div class="data-section">
             <h3>Température</h3>
             <p class="data-value">
-                <span id="temperature">--</span>
+                <span id="Temperature">--</span>  <!-- id="heart-rate"-->
                 <span>°C 🌡️</span>
             </p>
         </div>
         <div class="data-section">
             <h3>Fréquence cardiaque</h3>
             <p class="data-value">
-                <span id="heart-rate">--</span>
+                <span id="cardiaque">--</span> <!-- id="heart-rate"-->
                 <span>BPM ❤️</span>
             </p>
         </div>
@@ -147,7 +149,50 @@
         © 2025 TempBeat Dashboard. Fait par l'Ir(...tom nom...)
     </footer>
 
-    <script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+          authDomain: "esp32-b9013.firebaseapp.com",
+          databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "esp32-b9013",
+          storageBucket: "esp32-b9013.appspot.com",
+          messagingSenderId: "547189202345",
+          appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+        };
+      
+        // Initialize Firebase
+        //const app = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+        /*const messaging = firebase.messaging();
+        messaging.requestPermission()
+        .then(function(){
+          console.log('vous avez la permission');
+        })
+        .catch(function(err){
+          console.log('erreur de la permission');
+        })*/
+      
+        const database = firebase.database();
+      
+     // Lecture de la fréquence cardiaque (bpm)
+    database.ref("BIOMED/bpm").on("value", (snapshot) => {
+    const cardiaque = snapshot.val();
+    document.getElementById("cardiaque").textContent = cardiaque;
+
+   });
+
+
+   // Lecture de la temperature
+database.ref("BIOMED/temperature").on("value", (snapshot) => {
+    const temperature = snapshot.val();
+    document.getElementById("Temperature").textContent = temperature;
+});
+
         const menuToggle = document.querySelector('.menu-toggle');
         const sideMenu = document.getElementById('side-menu');
         
