@@ -1,77 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste de Patients</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #e3f2fd, #f4f5f7);
-            color: #333;
-        }
-        header {
-            background: #4a90e2;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .main-content {
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 900px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        ul li {
-            margin: 10px 0;
-        }
-        ul li a {
-            text-decoration: none;
-            color: #4a90e2;
-            font-size: 1.2em;
-            padding: 10px 15px;
-            display: block;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #f9f9f9;
-            transition: background-color 0.3s;
-        }
-        ul li a:hover {
-            background-color: #f0f8ff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page d'Accueil</title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
+
 </head>
 <body>
-    <header>
-        <h3>Liste de Patients</h3>
-    </header>
-    <div class="main-content">
-        
-        <ul>
-            <li><a href="tab1.html">MICHAEL HOZANA</a></li>
-            <li><a href="tab2.html">Nikola Tesla</a></li>
-            <li><a href="tab3.html">ALAIN ISAMBO</a></li>
-            <li><a href="">Jean Dupont</a></li>
-            <li><a href="">Thomas Edison</a></li>
-            <li><a href="">Rosalind Franklin</a></li>
-            <li><a href="">Charles Darwin</a></li>
-            <li><a href="">Ada Lovelace</a></li>
-            <li><a href="">Marie Curie</a></li>
-            <li><a href="">Isaac Newton</a></li>
-        </ul>
+  <header class="hero">
+    <div class="container">
+      <h1>Bienvenue à l'Aérogare</h1>
+      <p>Consultez les informations de vos vols en temps réel et profitez de nos services.</p>
+      <div class="btn-group">
+        <a href="départ.html" class="btn">Voir les Départs</a>
+        <a href="arrivé.html" class="btn">Voir les Arrivées</a>
+      </div>
     </div>
-    <footer style="text-align: center; margin-top: 20px; padding: 10px; background: #f0f4f8;">
-        © 2025 Liste Dashboard
-    </footer>
+  </header>
+  <main>
+    <section class="services">
+      <h2>Nos Services</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Informations en Temps Réel</h3>
+          <p>Accédez aux horaires de départ et d'arrivée actualisés pour tous les vols.</p>
+        </div>
+        <div class="card">
+          <h3>Facilité de Voyage</h3>
+          <p>Des services pratiques pour rendre votre voyage confortable et agréable.</p>
+        </div>
+        <div class="card">
+          <h3>Restauration</h3>
+          <p>Découvrez une variété de restaurants et cafés dans l'aérogare.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 Aérogare Internationale. Tous droits réservés.</p>
+  </footer>
+
+
+<!-- Bouton et formulaire -->
+<button id="openFormBtn" class="floating-btn">+</button>
+
+<div id="modalForm" class="modal">
+  <div class="modal-content">
+    <span id="closeFormBtn" class="close">&times;</span>
+
+    <div id="customAlert" class="custom-alert">
+      <p id="alertMessage"></p>
+      <button id="closeAlertBtn" class="btn">OK</button>
+    </div>
+
+    <h3>Connexion</h3>
+    <form>
+      <!--<label for="username">Nom :</label>-->
+      <input type="text" id="username" name="username" placeholder="Entrez votre nom" required>
+      
+      <!--<label for="password">Mot de passe :</label>-->
+      <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+      
+      <button type="submit" class="btn">Valider</button>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+  
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBkeYhHZc9Na0UHjETg9GABYsDZFx1bLtQ",
+    authDomain: "esp32-b9013.firebaseapp.com",
+    databaseURL: "https://esp32-b9013-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "esp32-b9013",
+    storageBucket: "esp32-b9013.appspot.com",
+    messagingSenderId: "547189202345",
+    appId: "1:547189202345:web:054bd09f1f7e66f7b538b8"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+/* code pour verifier dans la base de donnée*/
+
+    // Fonction pour afficher la notification personnalisée
+  function showAlert(message) {
+    const alertBox = document.getElementById('customAlert');
+    const alertMessage = document.getElementById('alertMessage');
+    const closeAlertBtn = document.getElementById('closeAlertBtn');
+
+    alertMessage.textContent = message; // Définir le message
+    alertBox.style.display = 'block'; // Afficher la boîte
+
+    // Fermer la notification lorsqu'on clique sur le bouton
+    closeAlertBtn.onclick = () => {
+      alertBox.style.display = 'none';
+    };
+  }
+
+  document.querySelector('form').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Empêcher le rechargement de la page
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (!username || !password) {
+      showAlert("Veuillez remplir tous les champs.");
+      return;
+    }
+
+    try {
+      // Référence à la base de données Firebase
+      const userRef = firebase.database().ref(`admin/${username}`);
+      
+      // Récupérer les données pour cet utilisateur
+      const snapshot = await userRef.get();
+
+      if (snapshot.exists()) {
+        const userData = snapshot.val();
+        
+        if (userData.passeword === password) {
+          showAlert("Connexion réussie !");
+          // Rediriger ou exécuter une autre action
+          window.location.href = 'operateur.html';
+        } else {
+          showAlert("Mot de passe incorrect.");
+        }
+      } else {
+        showAlert("Nom d'utilisateur introuvable.");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion :", error);
+      showAlert("Une erreur est survenue. Veuillez réessayer.");
+    }
+  });
+
+
+
+  // Script pour gérer l'ouverture et la fermeture du formulaire
+  const openFormBtn = document.getElementById('openFormBtn');
+  const closeFormBtn = document.getElementById('closeFormBtn');
+  const modalForm = document.getElementById('modalForm');
+
+  openFormBtn.addEventListener('click', () => {
+    modalForm.style.display = 'flex';
+  });
+
+  closeFormBtn.addEventListener('click', () => {
+    modalForm.style.display = 'none';
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === modalForm) {
+      modalForm.style.display = 'none';
+    }
+  });
+</script>
+
+
+
 </body>
 </html>
